@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gr.uom.adroid.lesson_11_2018_19">
+    package="gr.uom.adroid.lesson_11">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="gr.uom.adroid.lesson_11.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

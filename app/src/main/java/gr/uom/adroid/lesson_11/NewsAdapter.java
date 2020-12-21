@@ -1,4 +1,4 @@
-package gr.uom.adroid.lesson_11_2018_19;
+package gr.uom.adroid.lesson_11;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

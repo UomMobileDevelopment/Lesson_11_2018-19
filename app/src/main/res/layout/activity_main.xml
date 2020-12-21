@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gr.uom.adroid.lesson_11_2018_19.MainActivity">
+    tools:context="gr.uom.adroid.lesson_11.MainActivity">
 
     <ListView
         android:id="@+id/newsList"

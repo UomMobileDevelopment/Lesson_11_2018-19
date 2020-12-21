@@ -1,5 +1,5 @@
 
-package gr.uom.adroid.lesson_11_2018_19;
+package gr.uom.adroid.lesson_11;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -45,7 +45,7 @@ public class FetchNewsTask extends AsyncTask<String, Void, List<NewsEntry>> {
         List<NewsEntry> newsEntries = new ArrayList<>();
         for (int i = 0; i < newsArray.length(); i++) {
             NewsEntry entry = new NewsEntry();
-            JSONObject jsonEntry = (JSONObject)newsArray.get(i);
+            JSONObject jsonEntry = (JSONObject) newsArray.get(i);
             entry.setAuthor(jsonEntry.getString(authorKey));
             entry.setDescription(jsonEntry.getString(descriptionKey));
             entry.setTitle(jsonEntry.getString(titleKey));
@@ -80,33 +80,34 @@ public class FetchNewsTask extends AsyncTask<String, Void, List<NewsEntry>> {
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
             urlConnection.connect();
-
-            // Read the input stream into a String
-            InputStream inputStream = urlConnection.getInputStream();
             StringBuilder buffer = new StringBuilder();
-            if (inputStream == null) {
-                return new ArrayList<>();
-            }
-            reader = new BufferedReader(new InputStreamReader(inputStream));
+            if (urlConnection.getResponseCode() == 200) {
+                InputStream inputStream = urlConnection.getInputStream();
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line).append("\n");
-            }
+                if (inputStream == null) {
+                    return new ArrayList<>();
+                }
+                reader = new BufferedReader(new InputStreamReader(inputStream));
 
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line).append("\n");
+                }
+            }
             if (buffer.length() == 0) {
                 return new ArrayList<>();
             }
             String newsJSONString = buffer.toString();
             Log.v(LOG_TAG, "News JSON String: " + newsJSONString);
+
             return getNewsFromJSON(newsJSONString);
 
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error ", e);
             return new ArrayList<>();
-        }
-        finally {
+        } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
